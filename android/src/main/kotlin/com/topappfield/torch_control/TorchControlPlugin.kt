@@ -36,6 +36,9 @@ class TorchControlPlugin : FlutterPlugin, MethodCallHandler {
             "ready" -> {
                 result.success( getTorchControl().ready() )
             }
+            "deviceLock" -> {
+                result.success(true)
+            }
             else -> result.notImplemented()
         }
     }
