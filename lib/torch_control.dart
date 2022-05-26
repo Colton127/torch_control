@@ -12,6 +12,10 @@ class TorchControl {
 
   static bool _isOn = false;
 
+  static bool _isLocked = false;
+
+  static bool get isLocked => _isLocked;
+
   /// Is the flashlight on?
   static bool get isOn => _isOn;
 
@@ -24,6 +28,12 @@ class TorchControl {
     return _isOn;
   }
 
+//iOS Devices: Calls lockForConfiguration. Required for torch to work. Call this in advance to save performance during strobe.
+  static Future<bool> deviceLock(bool lock) async {
+    _isLocked = await _channel.invokeMethod('turn', {'lock': lock});
+    return _isLocked;
+  }
+
   /// Turn the flashlight on.
   static Future<bool> turnOn() async => turn(true);
 
@@ -34,6 +44,5 @@ class TorchControl {
   static Future<bool> toggle() async => turn(!isOn);
 
   /// Flash the flashlight for the specified duration.
-  static Future<void> flash(Duration duration) =>
-      turnOn().whenComplete(() => Future.delayed(duration, turnOff));
+  static Future<void> flash(Duration duration) => turnOn().whenComplete(() => Future.delayed(duration, turnOff));
 }
