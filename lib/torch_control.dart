@@ -30,7 +30,7 @@ class TorchControl {
 
 //iOS Devices: Calls lockForConfiguration. Required for torch to work. Call this in advance to save performance during strobe.
   static Future<bool> deviceLock(bool lock) async {
-    _isLocked = await _channel.invokeMethod('deviceLock', {'lock': lock});
+    _isLocked = await _channel.invokeMethod('lock', {'lock': lock});
     return _isLocked;
   }
 
