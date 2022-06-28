@@ -16,7 +16,7 @@ public class SwiftTorchControlPlugin: NSObject, FlutterPlugin {
             result(turn(state: state) )
         } else if (call.method == "ready"){
             result(hasTorch() )
-              } else if (call.method == "deviceLock"){
+              } else if (call.method == "lock"){
               let lock = ((call.arguments as! [String: Any])["lock"]) as! Bool;
 
             result(lockDeviceConfiguration(lock: lock) )
